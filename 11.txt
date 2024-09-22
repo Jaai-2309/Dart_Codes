@@ -1,0 +1,193 @@
+Microsoft Windows [Version 10.0.22621.3447]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Tanvi>mysql -u root -p
+Enter password: **********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 16
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| tanvi              |
+| information_schema |
+| mysql              |
+| performance_schema |
+| push               |
+| jaai               |
+| sys                |
++--------------------+
+7 rows in set (0.04 sec)
+
+mysql> use tanvi;
+Database changed
+crmysql> create table employee(emp_no int,e_name varchar(88),e_address varchar(88),e_phno long,dept_no varchar(77),dept_name varchar(77),job_id int,salary int);
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> desc employee;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| emp_no    | int         | YES  |     | NULL    |       |
+| e_name    | varchar(88) | YES  |     | NULL    |       |
+| e_address | varchar(88) | YES  |     | NULL    |       |
+| e_phno    | mediumtext  | YES  |     | NULL    |       |
+| dept_no   | varchar(77) | YES  |     | NULL    |       |
+| dept_name | varchar(77) | YES  |     | NULL    |       |
+| job_id    | int         | YES  |     | NULL    |       |
+| salary    | int         | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+8 rows in set (0.04 sec)
+
+mysql>  insert into employee values(10,"Renuka","rajewadi",8010512345,10,"IT",101,10000),(11,"mrunmai","pune",9310512345,11,"CS",102,20000),(12,"jaai","junar",9233512345,12,"ENTC",103,30000),(13,"tanvi","mahad",8010533438,14,"MECH",104,50000),(14,"anuja","nagar",8010672345,15,"EE",105,55000);
+Query OK, 5 rows affected (0.04 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select *from employee;
++--------+---------+-----------+------------+---------+-----------+--------+--------+
+| emp_no | e_name  | e_address | e_phno     | dept_no | dept_name | job_id | salary |
++--------+---------+-----------+------------+---------+-----------+--------+--------+
+|     10 | ovi     | birwadi   | 7249109556 | 10      | IT        |    101 |  10000 |
+|     11 | anvika  | pune      | 9623969153 | 11      | CS        |    102 |  20000 |
+|     12 | jaai    | junnar    | 9689951177 | 12      | ENTC      |    103 |  30000 |
+|     13 | tanvi   | mahad     | 8010533438 | 14      | MECH      |    104 |  50000 |
+|     14 | sanvi   | raigad    | 8010672345 | 15      | EE        |    105 |  55000 |
++--------+---------+-----------+------------+---------+-----------+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select *from employee where dept_no=10;
++--------+--------+-----------+------------+---------+-----------+--------+--------+
+| emp_no | e_name | e_address | e_phno     | dept_no | dept_name | job_id | salary |
++--------+--------+-----------+------------+---------+-----------+--------+--------+
+|     10 | ovi    | birwadi   | 7249109556 | 10      | IT        |    101 |  10000 |
++--------+--------+-----------+------------+---------+-----------+--------+--------+
+1 row in set (0.04 sec)
+
+mysql> update employee set e_address="nagpur" where emp_no=12;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from employee;
++--------+---------+-----------+------------+---------+-----------+--------+--------+
+| emp_no | e_name  | e_address | e_phno     | dept_no | dept_name | job_id | salary |
++--------+---------+-----------+------------+---------+-----------+--------+--------+
+|     10 | ovi     | birwadi   | 7249109556 | 10      | IT        |    101 |  10000 |
+|     11 | anvika  | pune      | 9623969153 | 11      | CS        |    102 |  20000 |
+|     12 | jaai    | junnar    | 9689951177 | 12      | ENTC      |    103 |  30000 |
+|     13 | tanvi   | mahad     | 8010533438 | 14      | MECH      |    104 |  50000 |
+|     14 | sanvi   | raigad    | 8010672345 | 15      | EE        |    105 |  55000 |
++--------+---------+-----------+------------+---------+-----------+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select *from employee where dept_name=MECH;
+ERROR 1054 (42S22): Unknown column 'MECH' in 'where clause'
+mysql> select *from employee where dept_name=mech;
+ERROR 1054 (42S22): Unknown column 'mech' in 'where clause'
+mysql> select *from employee where dept_name="mech";
++--------+--------+-----------+------------+---------+-----------+--------+--------+
+| emp_no | e_name | e_address | e_phno     | dept_no | dept_name | job_id | salary |
++--------+--------+-----------+------------+---------+-----------+--------+--------+
+|     13 | tanvi  | mahad     | 8010533438 | 14      | MECH      |    104 |  50000 |
++--------+--------+-----------+------------+---------+-----------+--------+--------+
+1 row in set (0.00 sec)
+
+mysql>
+
+mysql> alter table employee add emailid varchar(77);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| emp_no    | int         | YES  |     | NULL    |       |
+| e_name    | varchar(88) | YES  |     | NULL    |       |
+| e_address | varchar(88) | YES  |     | NULL    |       |
+| e_phno    | mediumtext  | YES  |     | NULL    |       |
+| dept_no   | varchar(77) | YES  |     | NULL    |       |
+| dept_name | varchar(77) | YES  |     | NULL    |       |
+| job_id    | int         | YES  |     | NULL    |       |
+| salary    | int         | YES  |     | NULL    |       |
+| emailid   | varchar(77) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+mysql> select *from employee;
++--------+---------+-----------+------------+---------+-----------+--------+--------+---------+
+| emp_no | e_name  | e_address | e_phno     | dept_no | dept_name | job_id | salary | emailid |
++--------+---------+-----------+------------+---------+-----------+--------+--------+---------+
+|     10 | ovi     | birwadi   | 7249109556 | 10      | IT        |    101 |  10000 | NULL    |
+|     11 | mrunmai | pune      | 9623969153 | 11      | CS        |    102 |  20000 | NULL    |
+|     12 | jaai    | nagpur    | 9233512345 | 12      | ENTC      |    103 |  30000 | NULL    |
+|     13 | tanvi   | mahad     | 8010533438 | 14      | MECH      |    104 |  50000 | NULL    |
+|     14 | sanvi   | raigad    | 8010672345 | 15      | EE        |    105 |  55000 | NULL    |
++--------+---------+-----------+------------+---------+-----------+--------+--------+---------+
+5 rows in set (0.00 sec)
+
+mysql> update employee set e_name="james",emailid="xyz@123" where emp_no=12;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from employee;
++--------+---------+-----------+------------+---------+-----------+--------+--------+---------+
+| emp_no | e_name  | e_address | e_phno     | dept_no | dept_name | job_id | salary | emailid |
++--------+---------+-----------+------------+---------+-----------+--------+--------+---------+
+|     10 | ovi     | birwadi   | 7249109556 | 10      | IT        |    101 |  10000 | NULL    |
+|     11 | mrunmai | pune      | 9623969153 | 11      | CS        |    102 |  20000 | NULL    |
+|     12 | james   | nagpur    | 9233512345 | 12      | ENTC      |    103 |  30000 | xyz@123 |
+|     13 | tanvi   | mahad     | 8010533438 | 14      | MECH      |    104 |  50000 | NULL    |
+|     14 | anuja   | nagar     | 8010672345 | 15      | EE        |    105 |  55000 | NULL    |
++--------+---------+-----------+------------+---------+-----------+--------+--------+---------+
+5 rows in set (0.00 sec)
+
+mysql> delete from employee where e_name="james";
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select *from employee;
++--------+---------+-----------+------------+---------+-----------+--------+--------+---------+
+| emp_no | e_name  | e_address | e_phno     | dept_no | dept_name | job_id | salary | emailid |
++--------+---------+-----------+------------+---------+-----------+--------+--------+---------+
+|     10 | ovi     | birwadi   | 7249109556 | 10      | IT        |    101 |  10000 | NULL    |
+|     11 | mrunmai | pune      | 9623969153 | 11      | CS        |    102 |  20000 | NULL    |
+|     13 | tanvi   | mahad     | 8010533438 | 14      | MECH      |    104 |  50000 | NULL    |
+|     14 | sanvi   | raigad    | 8010672345 | 15      | EE        |    105 |  55000 | NULL    |
++--------+---------+-----------+------------+---------+-----------+--------+--------+---------+
+4 rows in set (0.00 sec)
+
+mysql> update employee set dept_name="sales" where emp_no=11;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from employee;
++--------+---------+-----------+------------+---------+-----------+--------+--------+---------+
+| emp_no | e_name  | e_address | e_phno     | dept_no | dept_name | job_id | salary | emailid |
++--------+---------+-----------+------------+---------+-----------+--------+--------+---------+
+|     10 | ovi     | birwadi   | 7249109556 | 10      | IT        |    101 |  10000 | NULL    |
+|     11 | mrunmai | pune      | 9623969153 | 11      | sales     |    102 |  20000 | NULL    |
+|     13 | tanvi   | mahad     | 8010533438 | 14      | MECH      |    104 |  50000 | NULL    |
+|     14 | sanvi   | raigad    | 8010672345 | 15      | EE        |    105 |  55000 | NULL    |
++--------+---------+-----------+------------+---------+-----------+--------+--------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select *from employee where dept_name=sales;
+ERROR 1054 (42S22): Unknown column 'sales' in 'where clause'
+mysql> select *from employee where dept_name="sales";
++--------+---------+-----------+------------+---------+-----------+--------+--------+---------+
+| emp_no | e_name  | e_address | e_phno     | dept_no | dept_name | job_id | salary | emailid |
++--------+---------+-----------+------------+---------+-----------+--------+--------+---------+
+|     11 | mrunmai | pune      | 9310512345 | 11      | sales     |    102 |  20000 | NULL    |
++--------+---------+-----------+------------+---------+-----------+--------+--------+---------+
+1 row in set (0.00 sec)
+
+mysql>
